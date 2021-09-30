@@ -35,7 +35,7 @@ class Vertex:
 
 			#Agrego una lista a vecinos con el indice de vecino en [0]
 			#y el peso de la arista con el vecino en [1] 
-			self.append([v, p])
+			self.neighbors.append([v, p])
 
 """Clase cuyo fin es implementar el grafo que será utilizado para 
    representar la topología de red planteada"""
@@ -56,7 +56,7 @@ class Graph:
 	def add_vertex(self, v):
 
 		#Si el nodo con id 'v' no se encuentra en mi diccionario, lo agrego
-		if v not in self.vertices(v):
+		if v not in self.vertices:
 
 			#Agrego el id del vertice a mi diccionario
 			#Agrego el vertice indicando el objeto de tipo Vertice
@@ -129,17 +129,17 @@ class Graph:
 		3. Mientras la lista de nodos no visitados sea diferente de cero, hago lo siguiente:
 			
 			>> Para el nodo actual (a), teniendo en cuenta sus vecinos no visitados (b) y 
-			   considerando además su peso w:
+			considerando además su peso w:
 
-			   - Si la suma del peso del nodo actual (a) y el peso de la arista (w) es menor
-			   que el peso del nodo (b), entonces debo actualizar el peso de (b) con el resultado
-			   de la suma entre (a) y (w). Además, debo guardar al nodo (a) como predecesor de (b)
+			- Si la suma del peso del nodo actual (a) y el peso de la arista (w) es menor
+			que el peso del nodo (b), entonces debo actualizar el peso de (b) con el resultado
+			de la suma entre (a) y (w). Además, debo guardar al nodo (a) como predecesor de (b)
 			
 			>> Una vez se hayan visitado todos los nodos vecinos, y después de realizado el paso
-			   anterior, marco el nodo como visitado y lo elimino de mi lista de nodos no visitados.
+			anterior, marco el nodo como visitado y lo elimino de mi lista de nodos no visitados.
 
 			>> Ahora selecciono el nodo que no ha sido visitado con menor peso parcial y lo marco 
-			   como nuevo nodo actual. Regreso al paso número 3.
+			como nuevo nodo actual. Regreso al paso número 3.
 		"""
 
 		#Me aseguro de que esté en mi diccionario
@@ -162,10 +162,10 @@ class Graph:
 					#Segundo paso, establezco el peso 'infinito' de los demás vertices
 					#recorriendo el diccionario y le añado su predecesor como nulo
 					self.vertices[v].weight = float('inf')
-					self.vertices[v].predecessor = None
+				self.vertices[v].predecessor = None
 
-					#Añado los nodos a mi lista de no visitados
-					not_visited.append(v)
+				#Añado los nodos a mi lista de no visitados
+				not_visited.append(v)
 
 			#Paso 3, condición mientras, me aseguro de que la lista no esté vacía
 			while(len(not_visited)>0):
@@ -183,7 +183,7 @@ class Graph:
 							
 							#Asigno el peso del vecino con el nuevo valor que corresponderá a la suma entre
 							#el peso del nodo origen y el peso del nodo vecino
-							self.vertices[neighbor[0]].weight = self.vertices[actual].distancia + vecino[1]
+							self.vertices[neighbor[0]].weight = self.vertices[actual].weight + neighbor[1]
 							
 							#Asigno al predecesor del nodo vecino como el nodo actual
 							self.vertices[neighbor[0]].predecessor = actual
@@ -191,8 +191,9 @@ class Graph:
 				#Indico que el nodo actual ya fue visitado
 				self.vertices[actual].visited = True			
 
+				not_visited.remove(actual)
 				#Invoco a la función 'minimum' para saber qué nodo será el próximo nodo actual
-				actual = self.minimo(not_visited)
+				actual = self.minimum(not_visited)
 		
 		#Si no está en el diccionario me piro
 		else:
@@ -235,7 +236,6 @@ class Graph:
 
 #Prueba de algoritmo con direcciones IP
 class main:
-	
 	g = Graph()
 
 	#Añado todos los hosts
@@ -259,15 +259,16 @@ class main:
 	g.add_edge("192.168.0.4", "192.168.0.5", 6)
 	g.add_edge("192.168.0.5", "192.168.0.6", 9)
 
-	print("The fastest route and its weight is: \n")
+	print("\n\nThe fastest route and its weight is: \n")
 
 	#Indico el nodo inicial (Aquí se puede recibir de la interfaz)
 	g.dijkstra("192.168.0.1")
 
 	#Indico e imprimo que camino quiero calcular (Aquí se puede recibir de la interfaz)
-	print(g.path("192.168.0.1", "192.168.0.2"))
+	print(g.path("192.168.0.1", "192.168.0.6"))
 
-	print("Final weights: \n\n")
-	g,print_graph
+	print("\n\nFinal weights: \n")
+	g.print_graph()
+	print("\n")
 
 	
