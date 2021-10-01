@@ -1,9 +1,10 @@
 #Implementación de algoritmo Dijkstra
+import threading 
 
 """
 	Nodos = Enrutadores = Vertices
 	Aristas = Medio
-
+	
 """
 """Clase cuyo fin es describir el contenido pertinente de cada vertice"""
 class Vertex:
@@ -38,7 +39,7 @@ class Vertex:
 			self.neighbors.append([v, p])
 
 """Clase cuyo fin es implementar el grafo que será utilizado para 
-   representar la topología de red planteada"""
+representar la topología de red planteada"""
 class Graph:
 
 	#Método constructor
@@ -47,6 +48,7 @@ class Graph:
 		"""
 			Defino un diccionario en el cual su estructura será la siguiente
 			{clave:valor}
+			
 			{IDdelVertice:ObjetoTipoVertice}
 
 		"""
@@ -64,7 +66,10 @@ class Graph:
 
 	#Esta funcion recibe como parametros dos vertices y el peso que habrá
 	#entre ellos
-	def add_edge(self, a, b, p):
+	#@param a = vertice a
+	#@param b = vertice b
+	#@param p = peso
+	def add_edge(self,a, b, p):
 
 		#Primero confirmo si ambos vertices se encuentran en mi diccionario
 		if a in self.vertices and b in self.vertices:
@@ -92,7 +97,7 @@ class Graph:
 	def minimum(self, lista):
 
 		#Compruebo que no esté vacía	
-		if len(lista)>0:
+		if len(lista)>0: #Revisa por si las moscas uwu
 
 			#Defino una var 'm' con la que capturo el peso del vertice
 			m = self.vertices[lista[0]].weight
@@ -235,6 +240,8 @@ class Graph:
 
 
 #Prueba de algoritmo con direcciones IP
+
+"""
 class main:
 	g = Graph()
 
@@ -260,15 +267,25 @@ class main:
 	g.add_edge("192.168.0.5", "192.168.0.6", 9)
 
 	print("\n\nThe fastest route and its weight is: \n")
-
+	g.print_graph()
 	#Indico el nodo inicial (Aquí se puede recibir de la interfaz)
-	g.dijkstra("192.168.0.1")
+	#g.dijkstra("192.168.0.1")
 
 	#Indico e imprimo que camino quiero calcular (Aquí se puede recibir de la interfaz)
 	print(g.path("192.168.0.1", "192.168.0.6"))
+"""
 
-	print("\n\nFinal weights: \n")
-	g.print_graph()
-	print("\n")
+
+"""
+1. Funcion que agregue hilos con un tiempo (peso) y un paquete
+2. Funcion que permita seleccionar el nodo destino y origen en base a IP's (Interfaz)
+3. Funcion que simule el envío de paquetes
+4. Funcion que cree un grafo cada que se envíe un paquete
+5. Funcion que genere y retorne un tiempo aleatorio 
+6. Funcion que retorne (paquete, ruta)
+
+
+"""
+
 
 	

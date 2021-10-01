@@ -1,17 +1,32 @@
-import interfaz
-from paquete_c import paquete
-
-def generar_lista_de_nodos(matriz_adyacencia):
-    contador = 1
-    lista_nodos = []
-    for sub_matriz in matriz_adyacencia:
-        for nodo in sub_matriz:
-            lista_nodos.append(nodo)
-            contador += contador
-    return lista_nodos
+from controller import Controller
 
 if __name__ == "__main__":
     
+    controller = Controller()
+    controller.run()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    """"
     matriz_red_adyacencia = [[0,0,25],[0,0,25],[0,0,25],[0,0,25]]
     print(matriz_red_adyacencia[0][0])
 
@@ -27,7 +42,7 @@ if __name__ == "__main__":
     print(lista_paquetes)
     mensaje = empaquetador.paquetes_a_mensaje(lista_paquetes)
     print(mensaje)
-    
+    """
     
 
     #print(context)

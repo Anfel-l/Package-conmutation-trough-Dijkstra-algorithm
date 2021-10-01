@@ -21,17 +21,20 @@ Lee un nodo que solamente este en el rango establecido por la cantidad de elemen
 Excepcion: si se digita una string, retorna un error de tipo ValueError
 """
 def read_nodo(lista_nodos, tipo_nodo):
+    dir_ip  = str()
     while(True):
         printNodo(tipo_nodo)
         showNodos(lista_nodos)
         try:
-            nodo = int(readInput())
-            if(nodo < len(lista_nodos) and nodo >= 0):
-                break
+            input_text = int(readInput())
+            
+            if (input_text < len(lista_nodos) and input_text >= 0): 
+                dir_p = lista_nodos[input_text]
+                return dir_p
         except ValueError:
             print("Digite numeros enteros! Error:", ValueError)
-
-    return nodo
+    print("DIRRRRRRRR",dir_ip)
+    return dir_ip
 
 def getData(lista_nodos):
     printStringInput()
@@ -42,5 +45,8 @@ def getData(lista_nodos):
     context = (message,nodo_origin,nodo_destiny)
     return context
 
+
+
 def start(lista_nodos):
+
     return getData(lista_nodos)
